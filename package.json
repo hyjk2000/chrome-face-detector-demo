@@ -2,6 +2,7 @@
   "name": "chrome-face-detector",
   "version": "0.1.0",
   "description": "Demo of Experimental Face Detector API of Google Chrome",
+  "homepage": "https://hyjk2000.github.io/chrome-face-detector-demo",
   "repository": "https://github.com/hyjk2000/chrome-face-detector-demo",
   "author": "James Shih <gtx1024@gmail.com>",
   "license": "MIT",
