@@ -1,0 +1,11 @@
+.ErrorBoundary {
+  position: relative;
+  margin: 10vw;
+  padding: 5vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: lightgray;
+}
+
+.ErrorBoundary a {
+  color: inherit;
+}

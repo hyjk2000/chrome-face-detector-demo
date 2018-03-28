@@ -6,8 +6,7 @@ class FaceIndicator extends Component {
     super(props);
 
     if (! ('FaceDetector' in window)) {
-      console.error('FaceDetector not available - use Chrome and enable experimental web platform features (chrome://flags/#enable-experimental-web-platform-features)');
-      return false;
+      throw new Error('FaceDetector not available - Use Google Chrome and enable experimental web platform features (chrome://flags/#enable-experimental-web-platform-features)');
     }
     this.faceDetector = new window.FaceDetector({ fastMode: true });
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import ErrorBoundary from './ErrorBoundary';
 import FaceIndicator from './FaceIndicator';
 
 const mediaConstraints = {
@@ -51,7 +52,9 @@ class App extends Component {
     return (
       <div className="App">
         <video ref={this._videoRef} autoPlay />
-        <FaceIndicator video={video} />
+        <ErrorBoundary>
+          <FaceIndicator video={video} />
+        </ErrorBoundary>
       </div>
     );
   }
