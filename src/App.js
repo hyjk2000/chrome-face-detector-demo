@@ -17,7 +17,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    if (! ('getUserMedia' in navigator)) {
+    if (! ('getUserMedia' in navigator.mediaDevices)) {
       console.error('Webcam not available');
       return false;
     }
@@ -31,19 +31,16 @@ class App extends Component {
     this.video = video;
   };
 
-  componentDidMount() {
-    navigator.getUserMedia(
-      mediaConstraints,
-      (stream) => {
-        this.video.srcObject = stream;
-        this.setState({
-          video: this.video
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  async componentDidMount() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
+      this.video.srcObject = stream;
+      this.setState({
+        video: this.video
+      });
+    } catch (error) {
+      console.error(error);
+    };
   }
 
   render() {
