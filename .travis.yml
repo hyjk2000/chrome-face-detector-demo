@@ -9,6 +9,9 @@ cache: yarn
 script:
   - yarn build
 
+before_deploy:
+  - touch ./build/.nojekyll
+
 deploy:
   provider: pages
   skip-cleanup: true
