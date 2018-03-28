@@ -22,7 +22,7 @@ class FaceIndicator extends Component {
     if (video === undefined) return;
     const { videoWidth, videoHeight } = video;
 
-    if (this.canvasCtx === undefined) {
+    if (this.canvasCtx === undefined && videoWidth > 0 && videoHeight > 0) {
       this.canvas.width = videoWidth;
       this.canvas.height = videoHeight;
       this.canvasCtx = this.canvas.getContext('2d');
