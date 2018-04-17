@@ -1,16 +1,21 @@
 {
   "name": "chrome-face-detector",
   "version": "0.1.0",
-  "description": "Demo of Experimental Face Detector API of Google Chrome",
+  "description": "Demo of Experimental Face Detector API of Google Chrome.",
   "homepage": "https://hyjk2000.github.io/chrome-face-detector-demo",
-  "repository": "https://github.com/hyjk2000/chrome-face-detector-demo",
+  "repository": "hyjk2000/chrome-face-detector-demo",
   "author": "James Shih <gtx1024@gmail.com>",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.3.0",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
