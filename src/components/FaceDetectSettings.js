@@ -19,7 +19,7 @@ class FaceDetectSettings extends Component {
     return (
       <div className="FaceDetectSettings">
         <label>
-          Frequency
+          Refresh Rate
           <select
             name="interval"
             value={interval}
