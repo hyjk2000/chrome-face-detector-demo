@@ -9,7 +9,7 @@ class FaceCanvas extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { faces, width, height, isFailed } = this.props;
+    const { faces, width, height, showFacialFeatures, isFailed } = this.props;
 
     if (isFailed) return;
 
@@ -17,7 +17,7 @@ class FaceCanvas extends Component {
       this.setupCanvas(width, height);
     }
 
-    this.drawFaces(faces);
+    this.drawFaces(faces, showFacialFeatures);
   }
 
   setupCanvas(width, height) {
@@ -28,7 +28,7 @@ class FaceCanvas extends Component {
     }
   }
 
-  drawFaces(faces) {
+  drawFaces(faces, showFacialFeatures) {
     const ctx = this.canvasCtx;
     if (ctx === undefined || !faces) return false;
 
@@ -47,26 +47,28 @@ class FaceCanvas extends Component {
                boundingBox.height);
       ctx.stroke();
 
-      // Draw landmarks
-      landmarks.forEach((landmark) => {
-        switch (landmark.type) {
-          case 'eye':
-            ctx.fillStyle = 'green';
-            break;
-          case 'mouth':
-            ctx.fillStyle = 'blue';
-            break;
-          default:
-            ctx.fillStyle = 'yellow';
-        }
-
-        landmark.locations.forEach(location => {
-          ctx.fillRect(location.x - 3,
-                       location.y - 3,
-                       6,
-                       6);
+      if (showFacialFeatures) {
+        // Draw facial features
+        landmarks.forEach((landmark) => {
+          switch (landmark.type) {
+            case 'eye':
+              ctx.fillStyle = 'green';
+              break;
+            case 'mouth':
+              ctx.fillStyle = 'blue';
+              break;
+            default:
+              ctx.fillStyle = 'yellow';
+          }
+  
+          landmark.locations.forEach(location => {
+            ctx.fillRect(location.x - 3,
+                         location.y - 3,
+                         6,
+                         6);
+          });
         });
-      });
+      }
     });
   }
 

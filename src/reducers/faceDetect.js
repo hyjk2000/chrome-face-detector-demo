@@ -1,12 +1,24 @@
-import { handleAction, combineActions } from 'redux-actions';
-import { setFaceDetectInterval, invalidFaceDetect } from '../actions/faceDetect'
+import { handleActions } from 'redux-actions';
 
 const defaultState = {
   interval: 500,
+  showFacialFeatures: false,
   isFailed: false
 };
 
-export const faceDetect = handleAction(combineActions(setFaceDetectInterval, invalidFaceDetect), {
-  next: (state, { payload: { interval } }) => ({ ...state, interval, isFailed: false }),
-  throw: state => ({ ...state, isFailed: true }),
-}, defaultState)
+export const faceDetect = handleActions({
+  SET_FACE_DETECT_INTERVAL: (state, action) => ({
+    ...state,
+    interval: action.payload,
+    isFailed: false
+  }),
+  SET_SHOW_FACIAL_FEATURES: (state, action) => ({
+    ...state,
+    showFacialFeatures: action.payload,
+    isFailed: false
+  }),
+  INVALID_FACE_DETECT: state => ({
+    ...state,
+    isFailed: true
+  })
+}, defaultState);

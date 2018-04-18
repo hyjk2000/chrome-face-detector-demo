@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { invalidFaceDetect } from '../actions/faceDetect';
+import { setFaceDetectInterval, setShowFacialFeatures, invalidFaceDetect } from '../actions/faceDetect';
 import FaceCanvas from '../components/FaceCanvas';
+import FaceDetectSettings from '../components/FaceDetectSettings';
 
 class FaceDetector extends Component {
   state = {
@@ -42,8 +43,18 @@ class FaceDetector extends Component {
     clearTimeout(this.tmo);
   }
 
+  handleIntervalChange = interval => {
+    const { dispatch } = this.props;
+    dispatch(setFaceDetectInterval(interval));
+  };
+
+  handleShowFacialFeaturesChange = showFacialFeatures => {
+    const { dispatch } = this.props;
+    dispatch(setShowFacialFeatures(showFacialFeatures));
+  };
+
   render() {
-    const { isFailed } = this.props;
+    const { interval, showFacialFeatures, isFailed } = this.props;
     const { faces, videoWidth, videoHeight } = this.state;
     return (
       <div className="FaceDetector">
@@ -51,7 +62,12 @@ class FaceDetector extends Component {
           faces={faces}
           width={videoWidth}
           height={videoHeight}
+          showFacialFeatures={showFacialFeatures}
           isFailed={isFailed} />
+        <FaceDetectSettings
+          settings={{ interval, showFacialFeatures }}
+          handleIntervalChange={this.handleIntervalChange}
+          handleShowFacialFeaturesChange={this.handleShowFacialFeaturesChange} />
       </div>
     );
   }
@@ -60,9 +76,9 @@ class FaceDetector extends Component {
 const mapStateToProps = state => {
   const {
     userMedia: { videoRef },
-    faceDetect: { interval, isFailed }
+    faceDetect: { interval, showFacialFeatures, isFailed }
   } = state;
-  return { interval, videoRef, isFailed };
+  return { videoRef, interval, showFacialFeatures, isFailed };
 }
 
 export default connect(mapStateToProps)(FaceDetector);
