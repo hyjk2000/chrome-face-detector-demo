@@ -4,29 +4,21 @@ import { invalidFaceDetect } from '../actions/faceDetect';
 import FaceCanvas from '../components/FaceCanvas';
 
 class FaceDetector extends Component {
-  constructor(props) {
-    super(props);
+  state = {
+    faces: [],
+    videoWidth: 0,
+    videoHeight: 0
+  };
 
-    const { dispatch } = props;
-
-    try {
-      this.faceDetector = new window.FaceDetector({ fastMode: true });
-    } catch (e) {
-      dispatch(invalidFaceDetect(e));
-    }
-
-    this.state = {
-      faces: undefined,
-      videoWidth: undefined,
-      videoHeight: undefined
-    };
-  }
+  faceDetector = undefined;
+  tmo = undefined;
 
   detectFaces = async () => {
-    const { dispatch, videoRef } = this.props;
+    const { dispatch, videoRef, isFailed } = this.props;
 
-    if (videoRef !== undefined && videoRef.videoWidth > 0 && videoRef.videoHeight > 0) {      
+    if (!isFailed && videoRef !== undefined && videoRef.videoWidth > 0 && videoRef.videoHeight > 0) {      
       try {
+        if (!this.faceDetector) this.faceDetector = new window.FaceDetector({ fastMode: true });
         const faces = await this.faceDetector.detect(videoRef);
         const { videoWidth, videoHeight } = videoRef;
         this.setState(prevState => ({ faces, videoWidth, videoHeight }));
@@ -51,7 +43,7 @@ class FaceDetector extends Component {
   }
 
   render() {
-    const { isFaceDetectorFailed } = this.props;
+    const { isFailed } = this.props;
     const { faces, videoWidth, videoHeight } = this.state;
     return (
       <div className="FaceDetector">
@@ -59,7 +51,7 @@ class FaceDetector extends Component {
           faces={faces}
           width={videoWidth}
           height={videoHeight}
-          isFailed={isFaceDetectorFailed} />
+          isFailed={isFailed} />
       </div>
     );
   }
@@ -67,10 +59,10 @@ class FaceDetector extends Component {
 
 const mapStateToProps = state => {
   const {
-    userMedia: { videoRef, isFailed: isUserMediaFailed },
-    faceDetect: { interval, isFailed: isFaceDetectorFailed }
+    userMedia: { videoRef },
+    faceDetect: { interval, isFailed }
   } = state;
-  return { interval, videoRef, isUserMediaFailed, isFaceDetectorFailed };
+  return { interval, videoRef, isFailed };
 }
 
 export default connect(mapStateToProps)(FaceDetector);

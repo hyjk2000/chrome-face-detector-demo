@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import './FaceCanvas.css';
 
 class FaceCanvas extends Component {
@@ -10,7 +9,9 @@ class FaceCanvas extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { faces, width, height } = this.props;
+    const { faces, width, height, isFailed } = this.props;
+
+    if (isFailed) return;
 
     if (width !== prevProps.width || height !== prevProps.height) {
       this.setupCanvas(width, height);
@@ -88,9 +89,4 @@ class FaceCanvas extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { faceDetect: { interval, isFailed } } = state;
-  return { interval, isFailed };
-}
-
-export default connect(mapStateToProps)(FaceCanvas);
+export default FaceCanvas;
