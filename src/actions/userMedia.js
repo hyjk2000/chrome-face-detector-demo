@@ -1,10 +1,15 @@
-import { createActions } from 'redux-actions';
+import { createActions } from "redux-actions";
 
-export const { requestUserMedia, receiveUserMedia, invalidUserMedia, registerVideoRef } = createActions({
+export const {
+  requestUserMedia,
+  receiveUserMedia,
+  invalidUserMedia,
+  registerVideoRef
+} = createActions({
   REQUEST_USER_MEDIA: undefined,
   RECEIVE_USER_MEDIA: undefined,
   INVALID_USER_MEDIA: undefined,
-  REGISTER_VIDEO_REF: ref => (ref)
+  REGISTER_VIDEO_REF: ref => ref
 });
 
 const fetchUserMedia = () => async dispatch => {
@@ -13,7 +18,7 @@ const fetchUserMedia = () => async dispatch => {
     video: {
       width: { min: 640, ideal: 1280 },
       height: { min: 480, ideal: 720 },
-      facingMode: 'user'
+      facingMode: "user"
     },
     audio: false
   };
@@ -25,7 +30,7 @@ const fetchUserMedia = () => async dispatch => {
   }
 };
 
-const shouldFetchUserMedia = (state) => {
+const shouldFetchUserMedia = state => {
   if (state.userMedia.isFetching) return false;
   return !state.userMedia.stream;
 };
@@ -34,4 +39,4 @@ export const fetchUserMediaIfNeeded = () => (dispatch, getState) => {
   if (shouldFetchUserMedia(getState())) {
     return dispatch(fetchUserMedia());
   }
-}
+};

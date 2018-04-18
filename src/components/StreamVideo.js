@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import './StreamVideo.css';
+import React, { Component } from "react";
+import "./StreamVideo.css";
 
 class StreamVideo extends Component {
-  _videoRef = (video) => {
+  _videoRef = video => {
     const { getRef } = this.props;
     getRef(video);
     this.video = video;
@@ -26,15 +26,14 @@ class StreamVideo extends Component {
     const { isFailed } = this.props;
     return (
       <div className="StreamVideo">
-        { isFailed ? (
-            <div>
-              <h1>getUserMedia not available</h1>
-              Please grant camera permission in the browser
-            </div>
-          ) : (
-            <video ref={this._videoRef} autoPlay />
-          )
-        }
+        {isFailed ? (
+          <div>
+            <h1>getUserMedia not available</h1>
+            Please grant camera permission in the browser
+          </div>
+        ) : (
+          <video ref={this._videoRef} autoPlay />
+        )}
       </div>
     );
   }

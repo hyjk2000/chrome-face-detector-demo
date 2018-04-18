@@ -4,10 +4,10 @@
 
 ## Browser Compatibility
 
-- Google Chrome 57+ with [Experimental Web Platform Features](chrome://flags/#enable-experimental-web-platform-features) enabled ([tracking bug](https://crbug.com/646035))
+* Google Chrome 57+ with [Experimental Web Platform Features](chrome://flags/#enable-experimental-web-platform-features) enabled ([tracking bug](https://crbug.com/646035))
 
 ## APIs Used
 
-- [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) for retrieving camera feed
-- [`FaceDetector`](https://wicg.github.io/shape-detection-api/#face-detection-api) for detecting faces in video feed
-- [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for drawing face indicators
+* [`getUserMedia`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) for retrieving camera feed
+* [`FaceDetector`](https://wicg.github.io/shape-detection-api/#face-detection-api) for detecting faces in video feed
+* [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) for drawing face indicators

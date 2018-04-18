@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { registerVideoRef, fetchUserMediaIfNeeded } from '../actions/userMedia';
-import StreamVideo from '../components/StreamVideo';
-import FaceDetector from '../containers/FaceDetector';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { registerVideoRef, fetchUserMediaIfNeeded } from "../actions/userMedia";
+import StreamVideo from "../components/StreamVideo";
+import FaceDetector from "../containers/FaceDetector";
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +22,8 @@ class App extends Component {
         <StreamVideo
           stream={stream}
           isFailed={isFailed}
-          getRef={this.handleRegisterVideoRef} />
+          getRef={this.handleRegisterVideoRef}
+        />
         <FaceDetector />
       </div>
     );
@@ -30,8 +31,10 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  const { userMedia: { stream, isFailed, videoRef } } = state;
+  const {
+    userMedia: { stream, isFailed, videoRef }
+  } = state;
   return { stream, isFailed, videoRef };
-}
+};
 
 export default connect(mapStateToProps)(App);

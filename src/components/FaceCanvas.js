@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import './FaceCanvas.css';
+import React, { Component } from "react";
+import "./FaceCanvas.css";
 
 class FaceCanvas extends Component {
   canvasCtx = undefined;
 
-  _canvasRef = (canvas) => {
+  _canvasRef = canvas => {
     this.canvas = canvas;
   };
 
@@ -24,7 +24,7 @@ class FaceCanvas extends Component {
     if (this.canvasCtx === undefined && width > 0 && height > 0) {
       this.canvas.width = width;
       this.canvas.height = height;
-      this.canvasCtx = this.canvas.getContext('2d');
+      this.canvasCtx = this.canvas.getContext("2d");
     }
   }
 
@@ -34,38 +34,37 @@ class FaceCanvas extends Component {
 
     ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    faces.forEach((face) => {
+    faces.forEach(face => {
       const { boundingBox, landmarks } = face;
 
       // Draw faces
       ctx.beginPath();
       ctx.lineWidth = 3;
-      ctx.strokeStyle = 'red';
-      ctx.rect(boundingBox.x,
-               boundingBox.y,
-               boundingBox.width,
-               boundingBox.height);
+      ctx.strokeStyle = "red";
+      ctx.rect(
+        boundingBox.x,
+        boundingBox.y,
+        boundingBox.width,
+        boundingBox.height
+      );
       ctx.stroke();
 
       if (showFacialFeatures) {
         // Draw facial features
-        landmarks.forEach((landmark) => {
+        landmarks.forEach(landmark => {
           switch (landmark.type) {
-            case 'eye':
-              ctx.fillStyle = 'green';
+            case "eye":
+              ctx.fillStyle = "green";
               break;
-            case 'mouth':
-              ctx.fillStyle = 'blue';
+            case "mouth":
+              ctx.fillStyle = "blue";
               break;
             default:
-              ctx.fillStyle = 'yellow';
+              ctx.fillStyle = "yellow";
           }
-  
+
           landmark.locations.forEach(location => {
-            ctx.fillRect(location.x - 3,
-                         location.y - 3,
-                         6,
-                         6);
+            ctx.fillRect(location.x - 3, location.y - 3, 6, 6);
           });
         });
       }
@@ -76,16 +75,18 @@ class FaceCanvas extends Component {
     const { isFailed } = this.props;
     return (
       <div className="FaceCanvas">
-        { isFailed ? (
-            <div>
-              <h1>FaceDetector not available</h1>
-              Use Google Chrome and enable experimental web platform features: <br />
-              <a href="chrome://flags/#enable-experimental-web-platform-features">chrome://flags/#enable-experimental-web-platform-features</a>
-            </div>
-          ) : (
-            <canvas ref={this._canvasRef} />
-          )
-        }
+        {isFailed ? (
+          <div>
+            <h1>FaceDetector not available</h1>
+            Use Google Chrome and enable experimental web platform features:{" "}
+            <br />
+            <a href="chrome://flags/#enable-experimental-web-platform-features">
+              chrome://flags/#enable-experimental-web-platform-features
+            </a>
+          </div>
+        ) : (
+          <canvas ref={this._canvasRef} />
+        )}
       </div>
     );
   }

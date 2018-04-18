@@ -1,2 +1,2 @@
-export { userMedia } from './userMedia';
-export { faceDetect } from './faceDetect';
+export { userMedia } from "./userMedia";
+export { faceDetect } from "./faceDetect";

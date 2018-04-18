@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { setFaceDetectInterval, setShowFacialFeatures, invalidFaceDetect } from '../actions/faceDetect';
-import FaceCanvas from '../components/FaceCanvas';
-import FaceDetectSettings from '../components/FaceDetectSettings';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  setFaceDetectInterval,
+  setShowFacialFeatures,
+  invalidFaceDetect
+} from "../actions/faceDetect";
+import FaceCanvas from "../components/FaceCanvas";
+import FaceDetectSettings from "../components/FaceDetectSettings";
 
 class FaceDetector extends Component {
   state = {
@@ -17,9 +21,15 @@ class FaceDetector extends Component {
   detectFaces = async () => {
     const { dispatch, videoRef, isFailed } = this.props;
 
-    if (!isFailed && videoRef !== undefined && videoRef.videoWidth > 0 && videoRef.videoHeight > 0) {      
+    if (
+      !isFailed &&
+      videoRef !== undefined &&
+      videoRef.videoWidth > 0 &&
+      videoRef.videoHeight > 0
+    ) {
       try {
-        if (!this.faceDetector) this.faceDetector = new window.FaceDetector({ fastMode: true });
+        if (!this.faceDetector)
+          this.faceDetector = new window.FaceDetector({ fastMode: true });
         const faces = await this.faceDetector.detect(videoRef);
         const { videoWidth, videoHeight } = videoRef;
         this.setState(prevState => ({ faces, videoWidth, videoHeight }));
@@ -63,11 +73,13 @@ class FaceDetector extends Component {
           width={videoWidth}
           height={videoHeight}
           showFacialFeatures={showFacialFeatures}
-          isFailed={isFailed} />
+          isFailed={isFailed}
+        />
         <FaceDetectSettings
           settings={{ interval, showFacialFeatures }}
           handleIntervalChange={this.handleIntervalChange}
-          handleShowFacialFeaturesChange={this.handleShowFacialFeaturesChange} />
+          handleShowFacialFeaturesChange={this.handleShowFacialFeaturesChange}
+        />
       </div>
     );
   }
@@ -79,6 +91,6 @@ const mapStateToProps = state => {
     faceDetect: { interval, showFacialFeatures, isFailed }
   } = state;
   return { videoRef, interval, showFacialFeatures, isFailed };
-}
+};
 
 export default connect(mapStateToProps)(FaceDetector);

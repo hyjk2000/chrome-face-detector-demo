@@ -9,7 +9,8 @@
   line-height: 1.5rem;
 }
 
-.FaceDetectSettings select, .FaceDetectSettings input {
+.FaceDetectSettings select,
+.FaceDetectSettings input {
   margin-left: 0.5em;
   font-size: inherit;
 }
