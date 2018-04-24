@@ -9,7 +9,7 @@ export const {
   REQUEST_USER_MEDIA: undefined,
   RECEIVE_USER_MEDIA: undefined,
   INVALID_USER_MEDIA: undefined,
-  REGISTER_VIDEO_REF: ref => ref
+  REGISTER_VIDEO_REF: undefined
 });
 
 const fetchUserMedia = () => async dispatch => {
