@@ -32,9 +32,9 @@ class App extends Component {
 
 const mapStateToProps = state => {
   const {
-    userMedia: { stream, isFailed, videoRef }
+    userMedia: { stream, isFailed }
   } = state;
-  return { stream, isFailed, videoRef };
+  return { stream, isFailed };
 };
 
 export default connect(mapStateToProps)(App);
