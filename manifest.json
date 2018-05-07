@@ -1,0 +1,16 @@
+{
+  "short_name": "Face Detector",
+  "name": "Chrome Face Detector Demo",
+  "description": "Demo of Experimental Face Detector API of Google Chrome.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "./?utm_source=homescreen",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000"
+}
