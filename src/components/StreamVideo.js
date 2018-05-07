@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import "./StreamVideo.css";
+import { Typography, withStyles } from "material-ui";
+import ErrorMessage from "./ErrorMessage";
+import { fullScreen } from "../styles";
+
+const styles = { fullScreen };
 
 class StreamVideo extends Component {
   _videoRef = video => {
@@ -23,20 +27,24 @@ class StreamVideo extends Component {
   }
 
   render() {
-    const { isFailed } = this.props;
+    const { isFailed, classes } = this.props;
     return (
       <div className="StreamVideo">
         {isFailed ? (
-          <div>
-            <h1>getUserMedia not available</h1>
-            Please grant camera permission in the browser
-          </div>
+          <ErrorMessage>
+            <Typography variant="headline" color="inherit">
+              getUserMedia not available
+            </Typography>
+            <Typography color="inherit" component="p">
+              Please grant camera permission
+            </Typography>
+          </ErrorMessage>
         ) : (
-          <video ref={this._videoRef} autoPlay />
+          <video ref={this._videoRef} autoPlay className={classes.fullScreen} />
         )}
       </div>
     );
   }
 }
 
-export default StreamVideo;
+export default withStyles(styles)(StreamVideo);

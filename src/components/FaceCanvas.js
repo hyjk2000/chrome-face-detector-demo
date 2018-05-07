@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import "./FaceCanvas.css";
+import { Typography, withStyles } from "material-ui";
+import ErrorMessage from "./ErrorMessage";
+import { fullScreen } from "../styles";
+
+const styles = { fullScreen };
 
 class FaceCanvas extends Component {
   canvasCtx = undefined;
@@ -72,24 +76,28 @@ class FaceCanvas extends Component {
   }
 
   render() {
-    const { isFailed } = this.props;
+    const { isFailed, classes } = this.props;
     return (
       <div className="FaceCanvas">
         {isFailed ? (
-          <div>
-            <h1>FaceDetector not available</h1>
-            Use Google Chrome and enable experimental web platform features:{" "}
-            <br />
-            <a href="chrome://flags/#enable-experimental-web-platform-features">
-              chrome://flags/#enable-experimental-web-platform-features
-            </a>
-          </div>
+          <ErrorMessage>
+            <Typography variant="headline" color="inherit">
+              FaceDetector not available
+            </Typography>
+            <Typography color="inherit" component="p">
+              Use Google Chrome and enable experimental web platform features:{" "}
+              <br />
+              <a href="chrome://flags/#enable-experimental-web-platform-features">
+                chrome://flags/#enable-experimental-web-platform-features
+              </a>
+            </Typography>
+          </ErrorMessage>
         ) : (
-          <canvas ref={this._canvasRef} />
+          <canvas ref={this._canvasRef} className={classes.fullScreen} />
         )}
       </div>
     );
   }
 }
 
-export default FaceCanvas;
+export default withStyles(styles)(FaceCanvas);

@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  setFaceDetectInterval,
-  setShowFacialFeatures,
-  invalidFaceDetect
-} from "../actions/faceDetect";
+import { invalidFaceDetect } from "../actions/faceDetect";
 import FaceCanvas from "../components/FaceCanvas";
-import FaceDetectSettings from "../components/FaceDetectSettings";
 
 class FaceDetector extends Component {
   state = {
@@ -23,7 +18,7 @@ class FaceDetector extends Component {
 
     if (
       !isFailed &&
-      videoRef !== undefined &&
+      videoRef &&
       videoRef.videoWidth > 0 &&
       videoRef.videoHeight > 0
     ) {
@@ -53,34 +48,17 @@ class FaceDetector extends Component {
     clearTimeout(this.tmo);
   }
 
-  handleIntervalChange = interval => {
-    const { dispatch } = this.props;
-    dispatch(setFaceDetectInterval(interval));
-  };
-
-  handleShowFacialFeaturesChange = showFacialFeatures => {
-    const { dispatch } = this.props;
-    dispatch(setShowFacialFeatures(showFacialFeatures));
-  };
-
   render() {
-    const { interval, showFacialFeatures, isFailed } = this.props;
+    const { showFacialFeatures, isFailed } = this.props;
     const { faces, videoWidth, videoHeight } = this.state;
     return (
-      <div className="FaceDetector">
-        <FaceCanvas
-          faces={faces}
-          width={videoWidth}
-          height={videoHeight}
-          showFacialFeatures={showFacialFeatures}
-          isFailed={isFailed}
-        />
-        <FaceDetectSettings
-          settings={{ interval, showFacialFeatures }}
-          handleIntervalChange={this.handleIntervalChange}
-          handleShowFacialFeaturesChange={this.handleShowFacialFeaturesChange}
-        />
-      </div>
+      <FaceCanvas
+        faces={faces}
+        width={videoWidth}
+        height={videoHeight}
+        showFacialFeatures={showFacialFeatures}
+        isFailed={isFailed}
+      />
     );
   }
 }
